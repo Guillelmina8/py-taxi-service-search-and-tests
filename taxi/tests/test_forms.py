@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 
@@ -21,19 +22,19 @@ class LicenseNumberValidationTest(TestCase):
 
     def test_invalid_length(self):
         with self.assertRaisesMessage(
-            Exception, "License number should consist of 8 characters"
+            ValidationError, "License number should consist of 8 characters"
         ):
             validate_license_number("ABC123")
 
     def test_invalid_first_letters(self):
         with self.assertRaisesMessage(
-            Exception, "First 3 characters should be uppercase letters"
+            ValidationError, "First 3 characters should be uppercase letters"
         ):
             validate_license_number("abC12345")
 
     def test_invalid_last_digits(self):
         with self.assertRaisesMessage(
-            Exception, "Last 5 characters should be digits"
+            ValidationError, "Last 5 characters should be digits"
         ):
             validate_license_number("ABC12A45")
 

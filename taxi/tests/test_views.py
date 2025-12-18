@@ -13,19 +13,19 @@ DRIVER_URL = reverse("taxi:driver-list")
 class PublicPagesTest(TestCase):
     def test_home_login_required(self):
         res = self.client.get(HOME_URL)
-        self.assertNotEqual(res.status_code, 200)
+        self.assertRedirects(res, "/accounts/login/")
 
     def test_manufacturer_login_required(self):
         res = self.client.get(MANUFACTURER_URL)
-        self.assertNotEqual(res.status_code, 200)
+        self.assertRedirects(res, "/accounts/login/")
 
     def test_car_login_required(self):
         res = self.client.get(CAR_URL)
-        self.assertNotEqual(res.status_code, 200)
+        self.assertRedirects(res, "/accounts/login/")
 
     def test_driver_login_required(self):
         res = self.client.get(DRIVER_URL)
-        self.assertNotEqual(res.status_code, 200)
+        self.assertRedirects(res, "/accounts/login/")
 
 
 class PrivatePagesTest(TestCase):
